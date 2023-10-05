@@ -123,13 +123,11 @@ def next_page():
     st.session_state.idx += 1
     if st.session_state.idx >= len(img_paths):
         st.session_state.idx = 0
-    st.rerun()
 
 def previous_page():
     st.session_state.idx -= 1
     if st.session_state.idx < 0:
         st.session_state.idx = len(img_paths) -1
-    st.rerun()
     
 def get_author_title(item):
     return f"**{item['authors']}** | **{item['publisher']}**"
@@ -181,7 +179,9 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
             st.write(item["summary"])
 
         if previous_img:
+            st.rerun()
             previous_page()
 
         if next_img:
+            st.rerun()
             next_page()
