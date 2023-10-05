@@ -174,13 +174,13 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
                 switch_page("main")
             annotated_text(("**추천결과**", "", "#ff873d"))
 
-            item = result[st.session_state.idx%len(img_paths)]
+            item = result[st.session_state.idx]
             st.header(item["title"])
             st.write(
                 f"**{item['authors']}** | {item['publisher']} | {item['published_at']} | [yes24]({item['url']})")
             st.write(item["summary"])
 
-        if previous_img():
+        if previous_img:
             previous_page()
 
         if next_img:
