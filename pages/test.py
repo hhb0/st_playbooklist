@@ -127,7 +127,7 @@ def next_page():
 def previous_page():
     st.session_state.idx -= 1
     if st.session_state.idx < 0:
-        st.session_state.idx = -1
+        st.session_state.idx = len(img_paths) -1
 
 def get_author_title(item):
     return f"**{item['authors']}** | **{item['publisher']}**"
@@ -151,10 +151,8 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
         mockup_img = generate_mockup_img()
 
         with c1:
-            st.image(img_paths[st.session_state.idx%len(img_paths)])
+            st.image(img_paths[st.session_state.idx])
             st.write(st.session_state.idx)
-            st.write(st.session_state.idx%len(img_paths))
-            st.write(img_paths[st.session_state.idx%len(img_paths)])
             for index in range(len(result)):
                 img_url = result[index]['img_url']
                 title = result[index]['title']
