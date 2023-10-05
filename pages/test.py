@@ -128,7 +128,7 @@ def next_page():
 def previous_page():
     st.session_state.idx -= 1
     if st.session_state.idx < 0:
-        st.session_state.idx = len(img_paths)
+        st.session_state.idx = len(img_paths) - 1
 
 def get_author_title(item):
     return f"**{item['authors']}** | **{item['publisher']}**"
@@ -160,22 +160,25 @@ with st.spinner(text="책장에서 책을 꺼내오고 있습니다..📚"):
                 # 결과 이미지를 result_0.png, result_1.png로 저장. 덮어쓰기해서 용량 아끼기 위함.
                 generate_result_img(index, mockup_img, img_url, title, authors)
 
-            row1 = row(2, vertical_align="center")
-            previous_img = row1.button("**◀◀ 이전 장으로**")
-            next_img = row1.button("**다음 장으로 ▶▶**")
+            c3, c4 = st.columns(2, gap="small")
+            with c3:
+                previous_img = st.button("**◀◀ 이전 장으로**")
+            with c4:
+                next_img = st.button("**다음 장으로 ▶▶**")
 
         with c2:
             want_to_main = st.button("새 플레이리스트 만들기 🔁")
             if want_to_main:
                 switch_page("main")
             annotated_text(("**추천결과**", "", "#ff873d"))
-            for _, item in enumerate(result):
-                st.header(item["title"][st.session_state.idx])
-                st.write(
-                    f"**{item['authors'][st.session_state.idx]}** | {item['publisher'][st.session_state.idx]} | {item['published_at'][st.session_state.idx]} | [yes24]({item['url'][st.session_state.idx]})")
-                st.write(item["summary"][st.session_state.idx])
 
-        if previous_img():
+            item = result[st.session_state.idx]
+            st.header(item["title"])
+            st.write(
+                f"**{item['authors']}** | {item['publisher']} | {item['published_at']} | [yes24]({item['url']})")
+            st.write(item["summary"])
+
+        if previous_img:
             previous_page()
 
         if next_img:
