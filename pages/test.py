@@ -116,6 +116,16 @@ def show_image():
 
 cur_img_index, img_paths = show_image()
 
+def next_page():
+    st.session_state.idx += 1
+    if st.session_state.idx >= len(img_paths):
+        st.session_state.idx = 0
+
+def previous_page():
+    st.session_state.idx -= 1
+    if st.session_state.idx < 0:
+        st.session_state.idx = -1
+
 def get_author_title(item):
     return f"**{item['authors']}** | **{item['publisher']}**"
 
@@ -136,18 +146,15 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
         c1, c2 = st.columns(2)
         result = generate_result()
         mockup_img = generate_mockup_img()
-        index_list = [x for x in range(len(result))]
 
         with c1:
-            i = 0
+            st.image(img_paths[st.session_state.idx])
             for index in range(len(result)):
                 img_url = result[index]['img_url']
                 title = result[index]['title']
                 authors = result[index]['authors']
                 # 결과 이미지를 result_0.png, result_1.png로 저장. 덮어쓰기해서 용량 아끼기 위함.
                 generate_result_img(index, mockup_img, img_url, title, authors)
-
-            st.image(img_paths[index_list[i]])
 
             c3, c4 = st.columns(2)
             with c3:
@@ -156,7 +163,6 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
                 next_img = st.button("**다음 장으로 ▶▶**", on_click=(i+1))
 
         with c2:
-            i = 0
             want_to_main = st.button("새 플레이리스트 만들기 🔁")
             if want_to_main:
                 switch_page("main")
@@ -168,3 +174,8 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
                 f"**{item['authors']}** | {item['publisher']} | {item['published_at']} | [yes24]({item['url']})")
             st.write(item["summary"])
 
+        if previous_img():
+            previous_page()
+
+        if next_img:
+            next_page()
