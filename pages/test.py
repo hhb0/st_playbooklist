@@ -18,7 +18,7 @@ st.markdown(
             text-align:center;
             align-items: center;
             justify-content: center;
-            background-color: orange;
+            color: orange;
         }
     </style>""",
     unsafe_allow_html=True,
