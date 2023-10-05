@@ -151,9 +151,9 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
 
             c3, c4 = st.columns(2)
             with c3:
-                previous_img = st.button("**◀◀ 이전 장으로**")
+                previous_img = st.button("**◀◀ 이전 장으로**", on_click=(i-1))
             with c4:
-                next_img = st.button("**다음 장으로 ▶▶**")
+                next_img = st.button("**다음 장으로 ▶▶**", on_click=(i+1))
 
         with c2:
             i = 0
@@ -167,15 +167,4 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
             st.write(
                 f"**{item['authors']}** | {item['publisher']} | {item['published_at']} | [yes24]({item['url']})")
             st.write(item["summary"])
-
-        if previous_img:
-            i -= 1
-            if i < 0:
-                i = len(img_paths) - 1
-    
-        if next_img:
-            i += 1
-            if i >= len(img_paths):
-                i = 0
-
 
