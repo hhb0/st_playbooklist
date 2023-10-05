@@ -120,11 +120,13 @@ if 'idx' not in st.session_state:
     st.session_state.idx = 0
 
 def next_page():
+    st.rerun()
     st.session_state.idx += 1
     if st.session_state.idx >= len(img_paths):
         st.session_state.idx = 0
 
 def previous_page():
+    st.rerun()
     st.session_state.idx -= 1
     if st.session_state.idx < 0:
         st.session_state.idx = len(img_paths) -1
@@ -179,9 +181,7 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
             st.write(item["summary"])
 
         if previous_img:
-            st.rerun()
             previous_page()
 
         if next_img:
-            st.rerun()
             next_page()
