@@ -116,19 +116,6 @@ def show_image():
 
 cur_img_index, img_paths = show_image()
 
-if 'idx' not in st.session_state:
-    st.session_state.idx = 0
-
-def next_page():
-    st.session_state.idx += 1
-    if st.session_state.idx >= len(img_paths):
-        st.session_state.idx = 0
-
-def previous_page():
-    st.session_state.idx -= 1
-    if st.session_state.idx < 0:
-        st.session_state.idx = len(img_paths) - 1
-
 def get_author_title(item):
     return f"**{item['authors']}** | **{item['publisher']}**"
 
@@ -150,14 +137,18 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
         result = generate_result()
         mockup_img = generate_mockup_img()
         with c1:
-            st.image(img_paths[st.session_state.idx])
+            index_list = []
 
             for index in range(len(result)):
                 img_url = result[index]['img_url']
                 title = result[index]['title']
                 authors = result[index]['authors']
+                index_list.append(index)
                 # 결과 이미지를 result_0.png, result_1.png로 저장. 덮어쓰기해서 용량 아끼기 위함.
                 generate_result_img(index, mockup_img, img_url, title, authors)
+
+            i = 0
+            st.image(img_paths[index_list[i]])
 
             c3, c4 = st.columns(2)
             with c3:
@@ -178,8 +169,12 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
             st.write(item["summary"])
 
         if previous_img:
-            previous_page()
+            i -= 1
+            if i < 0:
+                i = len(img_paths) - 1
 
         if next_img:
-            next_page()
+            i += 1
+            if i >= len(img_paths):
+                i = 0
 
