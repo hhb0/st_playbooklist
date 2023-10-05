@@ -14,10 +14,7 @@ from pages.generate_result_img import *
 st.markdown(
     """
     <style>
-        .stSpinner > div > div > div > div {
-            text-align:center;
-            align-items: center;
-            justify-content: center;
+        .stProgress > div > div > div > div {
             background-color: orange;
         }
     </style>""",
@@ -136,7 +133,7 @@ def get_author_title(item):
 if __name__ == '__test__':
     openai.api_key = init_openai_key()
 
-with st.spinner(text="책장에서 책을 꺼내오고 있습니다..📚"):
+with st.progress(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
     with stylable_container(
             key="result_container",
             css_styles="""
@@ -147,7 +144,7 @@ with st.spinner(text="책장에서 책을 꺼내오고 있습니다..📚"):
             }
             """,
     ):
-        c1, c2 = st.columns(2, gap="small")
+        c1, c2 = st.columns(2)
         result = generate_result()
         mockup_img = generate_mockup_img()
         with c1:
@@ -160,7 +157,7 @@ with st.spinner(text="책장에서 책을 꺼내오고 있습니다..📚"):
                 # 결과 이미지를 result_0.png, result_1.png로 저장. 덮어쓰기해서 용량 아끼기 위함.
                 generate_result_img(index, mockup_img, img_url, title, authors)
 
-            c3, c4 = st.columns(2, gap="small")
+            c3, c4 = st.columns(2)
             with c3:
                 previous_img = st.button("**◀◀ 이전 장으로**")
             with c4:
