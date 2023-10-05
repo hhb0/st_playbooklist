@@ -152,6 +152,7 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
 
         with c1:
             st.image(img_paths[st.session_state.idx%len(img_paths)])
+            st.write(st.session_state.idx)
             st.write(st.session_state.idx%len(img_paths))
             st.write(img_paths[st.session_state.idx%len(img_paths)])
             for index in range(len(result)):
