@@ -137,8 +137,9 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
         result = generate_result()
         mockup_img = generate_mockup_img()
         index_list = [x for x in range(len(result))]
-        i = 0
+
         with c1:
+            i = 0
             for index in range(len(result)):
                 img_url = result[index]['img_url']
                 title = result[index]['title']
@@ -155,6 +156,7 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
                 next_img = st.button("**다음 장으로 ▶▶**")
 
         with c2:
+            i = 0
             want_to_main = st.button("새 플레이리스트 만들기 🔁")
             if want_to_main:
                 switch_page("main")
@@ -170,9 +172,10 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
             i -= 1
             if i < 0:
                 i = len(img_paths) - 1
-
+    
         if next_img:
             i += 1
             if i >= len(img_paths):
                 i = 0
+
 
