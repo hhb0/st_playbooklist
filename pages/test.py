@@ -9,6 +9,7 @@ import numpy as np
 import openai
 import pinecone
 import pickle
+import time
 from pages.generate_result_img import *
 
 st.markdown(
@@ -121,14 +122,16 @@ if 'idx' not in st.session_state:
 
 def next_page():
     st.session_state.idx += 1
-    # if st.session_state.idx >= len(img_paths):
-    #     st.session_state.idx = 0
+    if st.session_state.idx >= len(img_paths):
+        st.session_state.idx = 0
+    time.sleep(3)
 
 def previous_page():
     st.session_state.idx -= 1
-    # if st.session_state.idx < 0:
-    #     st.session_state.idx = len(img_paths) -1
-
+    if st.session_state.idx < 0:
+        st.session_state.idx = len(img_paths) -1
+    time.sleep(3)
+    
 def get_author_title(item):
     return f"**{item['authors']}** | **{item['publisher']}**"
 
