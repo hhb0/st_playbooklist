@@ -116,6 +116,12 @@ def show_image():
 
 cur_img_index, img_paths = show_image()
 
+if 'idx' not in st.session_state:
+    st.session_state.idx = 0
+
+if 'idx' in st.session_state:
+    st.session_state.idx += 1 
+
 def next_page():
     st.session_state.idx += 1
     if st.session_state.idx >= len(img_paths):
