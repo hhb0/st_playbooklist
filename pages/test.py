@@ -14,7 +14,10 @@ from pages.generate_result_img import *
 st.markdown(
     """
     <style>
-        .stProgress > div > div > div > div {
+        .stSpinner > div {
+            text-align:center;
+            align-items: center;
+            justify-content: center;
             background-color: orange;
         }
     </style>""",
@@ -133,7 +136,7 @@ def get_author_title(item):
 if __name__ == '__test__':
     openai.api_key = init_openai_key()
 
-with st.progress(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
+with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
     with stylable_container(
             key="result_container",
             css_styles="""
