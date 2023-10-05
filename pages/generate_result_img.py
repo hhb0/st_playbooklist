@@ -40,7 +40,7 @@ def _generate_title_img(title):
     text = title
     font_size = 19
     font_color = (255, 255, 255)
-    font = ImageFont.truetype("./pages/data/HANBatangB.ttf", font_size)  # 폰트 선택 (폰트 파일 경로를 지정해야 함)
+    font = ImageFont.truetype("./pages/data/RIDIBatang.otf", font_size)  # 폰트 선택 (폰트 파일 경로를 지정해야 함)
 
     # 책 제목 텍스트의 너비와 높이 계산
     text_bbox = font.getbbox(text)
@@ -70,7 +70,7 @@ def _generate_authors_img(authors):
     text = authors
     font_size = 15
     font_color = (255, 255, 255)
-    font = ImageFont.truetype("./pages/data/HANBatangB.ttf", font_size)  # 폰트 선택 (폰트 파일 경로를 지정해야 함)
+    font = ImageFont.truetype("./pages/data/RIDIBatang.otf", font_size)  # 폰트 선택 (폰트 파일 경로를 지정해야 함)
 
     # 작가 텍스트의 너비와 높이 계산
     text_bbox = font.getbbox(text)

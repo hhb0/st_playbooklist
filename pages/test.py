@@ -3,11 +3,11 @@ import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 from annotated_text import annotated_text
 from streamlit_extras.stylable_container import stylable_container
+from streamlit_extras.row import row
 import pandas as pd
 import numpy as np
 import openai
 import pinecone
-from PIL import Image
 import pickle
 from pages.generate_result_img import *
 
@@ -107,10 +107,15 @@ cur_img_index, img_paths = show_image()
 if 'idx' not in st.session_state:
     st.session_state.idx = 0
 
-def change():
+def next_page():
     st.session_state.idx += 1
     if st.session_state.idx >= len(img_paths):
         st.session_state.idx = 0
+
+def previous_page():
+    st.session_state.idx -= 1
+    if st.session_state.idx < 0:
+        st.session_state.idx = len(img_paths)
 
 def get_author_title(item):
     return f"**{item['authors']}** | **{item['publisher']}**"
@@ -145,22 +150,26 @@ with con1:
                 # 결과 이미지를 result_0.png, result_1.png로 저장. 덮어쓰기해서 용량 아끼기 위함.
                 generate_result_img(index, mockup_img, img_url, title, authors)
 
-            next_img = st.button("**다음 장으로 ▶▶**")
-
-            if next_img:
-                change()
+            row1 = row(2, vertical_align="center")
+            previous_img = row1.button("**◀◀ 이전 장으로**")
+            next_img = row1.button("**다음 장으로 ▶▶**")
 
         with c2:
             want_to_main = st.button("새 플레이리스트 만들기 🔁")
             if want_to_main:
                 switch_page("main")
             annotated_text(("**추천결과**", "", "#ff873d"))
-            for i, item in enumerate(result):
-                with st.expander(f"#{i + 1} {get_author_title(item)}"):
-                    st.header(item["title"])
-                    st.write(
-                        f"**{item['authors']}** | {item['publisher']} | {item['published_at']} | [yes24]({item['url']})")
-                    st.write(item["summary"])
+            for _, item in enumerate(result):
+                st.header(item["title"][st.session_state.idx])
+                st.write(
+                    f"**{item['authors'][st.session_state.idx]}** | {item['publisher'][st.session_state.idx]} | {item['published_at'][st.session_state.idx]} | [yes24]({item['url'][st.session_state.idx]})")
+                st.write(item["summary"][st.session_state.idx])
+
+        if previous_img():
+            previous_page()
+
+        if next_img:
+            next_page()
 
 with empty2:
     st.empty()
