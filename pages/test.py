@@ -136,18 +136,16 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
         c1, c2 = st.columns(2)
         result = generate_result()
         mockup_img = generate_mockup_img()
+        index_list = [x for x in range(len(result))]
+        i = 0
         with c1:
-            index_list = []
-
             for index in range(len(result)):
                 img_url = result[index]['img_url']
                 title = result[index]['title']
                 authors = result[index]['authors']
-                index_list.append(index)
                 # 결과 이미지를 result_0.png, result_1.png로 저장. 덮어쓰기해서 용량 아끼기 위함.
                 generate_result_img(index, mockup_img, img_url, title, authors)
 
-            i = 0
             st.image(img_paths[index_list[i]])
 
             c3, c4 = st.columns(2)
@@ -162,7 +160,7 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
                 switch_page("main")
             annotated_text(("**추천결과**", "", "#ff873d"))
 
-            item = result[st.session_state.idx]
+            item = result[index_list[i]]
             st.header(item["title"])
             st.write(
                 f"**{item['authors']}** | {item['publisher']} | {item['published_at']} | [yes24]({item['url']})")
