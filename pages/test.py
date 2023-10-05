@@ -119,9 +119,6 @@ cur_img_index, img_paths = show_image()
 if 'idx' not in st.session_state:
     st.session_state.idx = 0
 
-if 'idx' in st.session_state:
-    st.session_state.idx += 1 
-
 def next_page():
     st.session_state.idx += 1
     if st.session_state.idx >= len(img_paths):
@@ -154,7 +151,7 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
         mockup_img = generate_mockup_img()
 
         with c1:
-            st.image(img_paths[st.session_state.idx])
+            st.image(img_paths[st.session_state.idx%len(img_paths)])
             for index in range(len(result)):
                 img_url = result[index]['img_url']
                 title = result[index]['title']
@@ -164,9 +161,9 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
 
             c3, c4 = st.columns(2)
             with c3:
-                previous_img = st.button("**◀◀ 이전 장으로**", on_click=(i-1))
+                previous_img = st.button("**◀◀ 이전 장으로**")
             with c4:
-                next_img = st.button("**다음 장으로 ▶▶**", on_click=(i+1))
+                next_img = st.button("**다음 장으로 ▶▶**")
 
         with c2:
             want_to_main = st.button("새 플레이리스트 만들기 🔁")
@@ -174,7 +171,7 @@ with st.spinner(text="**책장에서 책을 꺼내오고 있습니다..📚**"):
                 switch_page("main")
             annotated_text(("**추천결과**", "", "#ff873d"))
 
-            item = result[index_list[i]]
+            item = result[st.session_state.idx%len(img_paths)]
             st.header(item["title"])
             st.write(
                 f"**{item['authors']}** | {item['publisher']} | {item['published_at']} | [yes24]({item['url']})")
