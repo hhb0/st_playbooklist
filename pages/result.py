@@ -137,7 +137,6 @@ if __name__ == '__main__':
                     border: 3px solid rgba(150, 55, 23, 0.2);
                     border-radius: 0.5rem;
                     padding: calc(1em - 3px)
-                    width: 800px
                 }
                 """,
         ):
