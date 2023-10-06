@@ -211,6 +211,6 @@ if __name__ == '__main__':
                         st.success("Play Book List🎼")
                         with open('index_list.pickle', 'wb') as file:
                             pickle.dump(index_list, file)
-                        switch_page("test")
+                        switch_page("result")
         with e2:
             st.empty()
