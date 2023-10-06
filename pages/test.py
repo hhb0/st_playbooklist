@@ -10,6 +10,22 @@ import pickle
 import pinecone
 import numpy as np
 
+st.set_page_config(
+    page_title="result",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
+st.markdown(
+    """
+<style>
+    [data-testid="collapsedControl"] {
+        display: none
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
 st.markdown(
     """
     <style>
