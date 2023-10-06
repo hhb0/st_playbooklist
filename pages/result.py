@@ -140,7 +140,7 @@ if __name__ == '__main__':
                 }
                 """,
         ):
-            e1, c1, c2, e2 = st.columns([0.1, 1.0, 1.0, 0.1], gap="medium")
+            e1, c1, c2, e2 = st.columns([0.1, 2.0, 2.0, 0.1], gap="medium")
             with e1:
                 st.empty()
             
