@@ -140,10 +140,8 @@ if __name__ == '__main__':
                 }
                 """,
         ):
-            e1, c1, c2, e2 = st.columns([0.1, 2.0, 2.0, 0.1], gap="medium")
-            with e1:
-                st.empty()
             
+            c1, c2 = st.columns(2, gap="large")
             result = generate_result()
             mockup_img = generate_mockup_img()
             for index in range(len(result)):
@@ -171,7 +169,7 @@ if __name__ == '__main__':
 
                 current_image_index %= len(img_paths)
 
-                st.write(f'{current_image_index+1}위')
+                annotated_text((f'TOP{len(result)} : {current_image_index+1}위', "#32CD32"))
 
                 # 현재 이미지를 표시
                 st.image(img_paths[current_image_index])
@@ -188,6 +186,3 @@ if __name__ == '__main__':
 
                 annotated_text(("**추천결과**", "", "#ff873d"))
                 recommend_result(current_image_index)
-
-            with e2:
-                st.empty()
