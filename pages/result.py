@@ -169,7 +169,7 @@ if __name__ == '__main__':
 
                 current_image_index %= len(img_paths)
 
-                annotated_text((f'TOP{len(result)} : {current_image_index+1}위', "#32CD32"))
+                annotated_text((f'TOP{len(result)} : {current_image_index+1}위', "", "#f9e440"))
 
                 # 현재 이미지를 표시
                 st.image(img_paths[current_image_index])
