@@ -11,7 +11,7 @@ import time
 import traceback
 
 st.set_page_config(
-    page_title="main",
+    page_title="wide",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
