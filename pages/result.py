@@ -140,7 +140,10 @@ if __name__ == '__main__':
                 }
                 """,
         ):
-            c1, c2 = st.columns(2, gap="medium")
+            e1, c1, c2, e2 = st.columns([0.1, 1.0, 1.0, 0.1], gap="medium")
+            with e1:
+                st.empty()
+            
             result = generate_result()
             mockup_img = generate_mockup_img()
             for index in range(len(result)):
@@ -185,3 +188,6 @@ if __name__ == '__main__':
 
                 annotated_text(("**추천결과**", "", "#ff873d"))
                 recommend_result(current_image_index)
+
+            with e2:
+                st.empty()
