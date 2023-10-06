@@ -136,11 +136,11 @@ if __name__ == '__main__':
                 {
                     border: 3px solid rgba(150, 55, 23, 0.2);
                     border-radius: 0.5rem;
-                    padding: calc(1em - 1px)
+                    padding: calc(1em - 3px)
                 }
                 """,
         ):
-            c1, c2 = st.columns(2)
+            c1, c2 = st.columns(2, gap="medium")
             result = generate_result()
             mockup_img = generate_mockup_img()
             for index in range(len(result)):
