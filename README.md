@@ -32,7 +32,6 @@
   - Beautiful Soup: 크롤링한 노래 데이터 파싱
   - Pandas: 데이터 조작 및 분석
   - Openai Embedding API: 책의 데이터와 유저 입력값을 임베딩
-  - Openai GPT-3.5: 추천 결과 안내
  
 - Pinecone
   - 책의 메타 데이터와 임베딩 데이터를 디비화
