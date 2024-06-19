@@ -52,7 +52,7 @@ def init_pinecone_connection():
         api_key=st.secrets["PINECONE_KEY"],
         environment=st.secrets["PINECONE_REGION"]
     )
-    pinecone_index = pinecone.Index('bookstore')
+    pinecone_index = pinecone.Index('playbooklist')
     return pinecone_index
 
 
